@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Bookrating (Collaborative-Filtering) | AI projects</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Bookrating (Collaborative-Filtering)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Prediction of tangible books to read using collaborative filtering" />
+<meta property="og:description" content="Prediction of tangible books to read using collaborative filtering" />
+<link rel="canonical" href="https://rajivreddy219.github.io/ai-projects/jupyter/pytorch/pytorch-lightning/2021/01/26/Bookrating.html" />
+<meta property="og:url" content="https://rajivreddy219.github.io/ai-projects/jupyter/pytorch/pytorch-lightning/2021/01/26/Bookrating.html" />
+<meta property="og:site_name" content="AI projects" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-26T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://rajivreddy219.github.io/ai-projects/jupyter/pytorch/pytorch-lightning/2021/01/26/Bookrating.html","@type":"BlogPosting","headline":"Bookrating (Collaborative-Filtering)","dateModified":"2021-01-26T00:00:00-06:00","datePublished":"2021-01-26T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://rajivreddy219.github.io/ai-projects/jupyter/pytorch/pytorch-lightning/2021/01/26/Bookrating.html"},"description":"Prediction of tangible books to read using collaborative filtering","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/ai-projects/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://rajivreddy219.github.io/ai-projects/feed.xml" title="AI projects" /><link rel="shortcut icon" type="image/x-icon" href="/ai-projects/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/ai-projects/">AI projects</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/ai-projects/about/">About Me</a><a class="page-link" href="/ai-projects/search/">Search</a><a class="page-link" href="/ai-projects/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Bookrating (Collaborative-Filtering)</h1><p class="page-description">Prediction of tangible books to read using collaborative filtering</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-01-26T00:00:00-06:00" itemprop="datePublished">
+        Jan 26, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/ai-projects/categories/#jupyter">jupyter</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/ai-projects/categories/#pytorch">pytorch</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/ai-projects/categories/#pytorch-lightning">pytorch-lightning</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/rajivreddy219/ai-projects/tree/master/_notebooks/2021-01-26-Bookrating.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/ai-projects/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/rajivreddy219/ai-projects/master?filepath=_notebooks%2F2021-01-26-Bookrating.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/ai-projects/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/rajivreddy219/ai-projects/blob/master/_notebooks/2021-01-26-Bookrating.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/ai-projects/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-01-26-Bookrating.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">fastai</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Drive already mounted at /content/drive; to attempt to forcibly remount, call drive.mount(&#34;/content/drive&#34;, force_remount=True).
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.collab</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pathr</span> <span class="o">=</span> <span class="s1">&#39;/content/drive/MyDrive/my-datasets/collaborative-filtering/BX-Book-Ratings.csv&#39;</span>
+<span class="n">pathb</span> <span class="o">=</span> <span class="s1">&#39;/content/drive/MyDrive/my-datasets/collaborative-filtering/BX-Books.csv&#39;</span>
+<span class="n">pathu</span> <span class="o">=</span> <span class="s1">&#39;/content/drive/MyDrive/my-datasets/collaborative-filtering/BX-Users.csv&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">pathr</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">error_bad_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+<span class="n">dfb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">pathb</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">error_bad_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+<span class="n">dfu</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">pathu</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">error_bad_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>b&#39;Skipping line 6452: expected 8 fields, saw 9\nSkipping line 43667: expected 8 fields, saw 10\nSkipping line 51751: expected 8 fields, saw 9\n&#39;
+b&#39;Skipping line 92038: expected 8 fields, saw 9\nSkipping line 104319: expected 8 fields, saw 9\nSkipping line 121768: expected 8 fields, saw 9\n&#39;
+b&#39;Skipping line 144058: expected 8 fields, saw 9\nSkipping line 150789: expected 8 fields, saw 9\nSkipping line 157128: expected 8 fields, saw 9\nSkipping line 180189: expected 8 fields, saw 9\nSkipping line 185738: expected 8 fields, saw 9\n&#39;
+b&#39;Skipping line 209388: expected 8 fields, saw 9\nSkipping line 220626: expected 8 fields, saw 9\nSkipping line 227933: expected 8 fields, saw 11\nSkipping line 228957: expected 8 fields, saw 10\nSkipping line 245933: expected 8 fields, saw 9\nSkipping line 251296: expected 8 fields, saw 9\nSkipping line 259941: expected 8 fields, saw 9\nSkipping line 261529: expected 8 fields, saw 9\n&#39;
+/usr/local/lib/python3.6/dist-packages/IPython/core/interactiveshell.py:2718: DtypeWarning: Columns (3) have mixed types.Specify dtype option on import or set low_memory=False.
+  interactivity=interactivity, compiler=compiler, result=result)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfb</span> <span class="o">=</span> <span class="n">dfb</span><span class="p">[[</span><span class="s1">&#39;ISBN&#39;</span><span class="p">,</span><span class="s1">&#39;Book-Title&#39;</span><span class="p">,</span><span class="s1">&#39;Book-Author&#39;</span><span class="p">,</span><span class="s1">&#39;Year-Of-Publication&#39;</span><span class="p">,</span><span class="s1">&#39;Publisher&#39;</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfr</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User-ID</th>
+      <th>ISBN</th>
+      <th>Book-Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>276725</td>
+      <td>034545104X</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>276726</td>
+      <td>0155061224</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>276727</td>
+      <td>0446520802</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>276729</td>
+      <td>052165615X</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>276729</td>
+      <td>0521795028</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfb</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ISBN</th>
+      <th>Book-Title</th>
+      <th>Book-Author</th>
+      <th>Year-Of-Publication</th>
+      <th>Publisher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0195153448</td>
+      <td>Classical Mythology</td>
+      <td>Mark P. O. Morford</td>
+      <td>2002</td>
+      <td>Oxford University Press</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0002005018</td>
+      <td>Clara Callan</td>
+      <td>Richard Bruce Wright</td>
+      <td>2001</td>
+      <td>HarperFlamingo Canada</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0060973129</td>
+      <td>Decision in Normandy</td>
+      <td>Carlo D'Este</td>
+      <td>1991</td>
+      <td>HarperPerennial</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0374157065</td>
+      <td>Flu: The Story of the Great Influenza Pandemic of 1918 and the Search for the Virus That Caused It</td>
+      <td>Gina Bari Kolata</td>
+      <td>1999</td>
+      <td>Farrar Straus Giroux</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0393045218</td>
+      <td>The Mummies of Urumchi</td>
+      <td>E. J. W. Barber</td>
+      <td>1999</td>
+      <td>W. W. Norton &amp;amp; Company</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">dfr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dfb</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User-ID</th>
+      <th>ISBN</th>
+      <th>Book-Rating</th>
+      <th>Book-Title</th>
+      <th>Book-Author</th>
+      <th>Year-Of-Publication</th>
+      <th>Publisher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>276725</td>
+      <td>034545104X</td>
+      <td>0</td>
+      <td>Flesh Tones: A Novel</td>
+      <td>M. J. Rose</td>
+      <td>2002</td>
+      <td>Ballantine Books</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2313</td>
+      <td>034545104X</td>
+      <td>5</td>
+      <td>Flesh Tones: A Novel</td>
+      <td>M. J. Rose</td>
+      <td>2002</td>
+      <td>Ballantine Books</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6543</td>
+      <td>034545104X</td>
+      <td>0</td>
+      <td>Flesh Tones: A Novel</td>
+      <td>M. J. Rose</td>
+      <td>2002</td>
+      <td>Ballantine Books</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8680</td>
+      <td>034545104X</td>
+      <td>5</td>
+      <td>Flesh Tones: A Novel</td>
+      <td>M. J. Rose</td>
+      <td>2002</td>
+      <td>Ballantine Books</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10314</td>
+      <td>034545104X</td>
+      <td>9</td>
+      <td>Flesh Tones: A Novel</td>
+      <td>M. J. Rose</td>
+      <td>2002</td>
+      <td>Ballantine Books</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dls</span> <span class="o">=</span> <span class="n">CollabDataLoaders</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">item_name</span><span class="o">=</span><span class="s1">&#39;Book-Title&#39;</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+<span class="n">dls</span><span class="o">.</span><span class="n">show_batch</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User-ID</th>
+      <th>Book-Title</th>
+      <th>Book-Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>153662</td>
+      <td>Too Much Too Soon Int</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>93047</td>
+      <td>Bartholomew and the Oobleck : (Caldecott Honor Book)</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>25008</td>
+      <td>The Talented Mr. Ripley (Vintage Crime/Black Lizard)</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>172054</td>
+      <td>The Quilter's Apprentice</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>76942</td>
+      <td>Carriers</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>15957</td>
+      <td>Ruth Park's \Harp in the South\" Novels"</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>247429</td>
+      <td>Women Pray: Voices Through the Ages, from Many Faiths, Cultures, and Traditions</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>225199</td>
+      <td>La VÃ?Â©nus d'ille</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>224525</td>
+      <td>Psychic Tarot: Illustrated with the Aquarian Tarot Deck</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>154176</td>
+      <td>SPELLBINDER X</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">collab_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">5.5</span><span class="p">),</span> <span class="n">n_factors</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">2e-3</span><span class="p">,</span> <span class="n">wd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>13.079836</td>
+      <td>13.260295</td>
+      <td>02:53</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>12.927390</td>
+      <td>12.971729</td>
+      <td>02:53</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>12.637070</td>
+      <td>12.929997</td>
+      <td>02:54</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>12.430797</td>
+      <td>12.923674</td>
+      <td>02:52</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>12.032089</td>
+      <td>12.930154</td>
+      <td>02:52</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">recommend</span><span class="p">(</span><span class="n">book</span><span class="p">):</span>
+  <span class="n">movie_factors</span> <span class="o">=</span> <span class="n">learn</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">i_weight</span><span class="o">.</span><span class="n">weight</span>
+  <span class="n">idx</span> <span class="o">=</span> <span class="n">dls</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">&#39;Book-Title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">o2i</span><span class="p">[</span><span class="n">book</span><span class="p">]</span>
+  <span class="n">dist</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CosineSimilarity</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="n">movie_factors</span><span class="p">,</span> <span class="n">movie_factors</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="kc">None</span><span class="p">])</span>
+  <span class="n">indices</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">dls</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">&#39;Book-Title&#39;</span><span class="p">][</span><span class="n">indices</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">recommend</span><span class="p">(</span><span class="s1">&#39;Harry Potter and the Prisoner of Azkaban (Book 3)&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Harry Potter and the Goblet of Fire (Book 4)
+Harry Potter and the Chamber of Secrets (Book 2)
+The X-Planes: X-1 to X-45: 3rd Edition
+Sanctuary: Finding Moments of Refuge in the Presence of God
+Harry Potter and the Sorcerer&#39;s Stone (Book 1)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="rajivreddy219/ai-projects"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/ai-projects/jupyter/pytorch/pytorch-lightning/2021/01/26/Bookrating.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/ai-projects/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/ai-projects/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/ai-projects/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>By RAJIV REDDY VANIPENTA</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/rajivreddy219" title="rajivreddy219"><svg class="svg-icon grey"><use xlink:href="/ai-projects/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/rajivbunny219" title="rajivbunny219"><svg class="svg-icon grey"><use xlink:href="/ai-projects/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
