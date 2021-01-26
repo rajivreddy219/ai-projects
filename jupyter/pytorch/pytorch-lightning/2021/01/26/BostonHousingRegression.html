@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      4 min read
     
 </span></p>
 
@@ -860,28 +860,6 @@ LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># _y, y = model.predict(test_ds)</span>
-<span class="c1"># _, outsc = dm.trn_ds.scalers</span>
-<span class="c1"># _y = _y.view(-1,1)</span>
-<span class="c1"># y = y.view(-1,1)</span>
-<span class="c1"># _y = outsc.inverse_transform(_y)</span>
-<span class="c1"># y = outsc.inverse_transform(y)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_ds</span> <span class="o">=</span> <span class="n">BostonDS</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">trn_ds</span><span class="o">.</span><span class="n">scalers</span><span class="p">)</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">inv_t</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">trn_ds</span><span class="o">.</span><span class="n">scalers</span>
 <span class="n">preds</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_ds</span><span class="p">,</span> <span class="n">inv_t</span><span class="p">)</span>
@@ -890,148 +868,6 @@ LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[21.82140812],
-       [16.68913797],
-       [13.58146355],
-       [47.22882479],
-       [ 4.74462621],
-       [22.41462693],
-       [27.0130758 ],
-       [15.3748931 ],
-       [19.61103991],
-       [36.13087922],
-       [20.50693259],
-       [13.93692598],
-       [11.95510745],
-       [25.36681369],
-       [17.82088667],
-       [21.69055656],
-       [17.256338  ],
-       [12.19783932],
-       [26.10875964],
-       [14.05675098],
-       [14.82883424],
-       [11.66689336],
-       [43.09464753],
-       [13.98806095],
-       [13.12441111],
-       [31.15622371],
-       [13.33665431],
-       [26.94362536],
-       [31.51289582],
-       [32.45961905],
-       [29.84122783],
-       [22.18970761],
-       [45.08382201],
-       [18.432661  ],
-       [28.8835907 ],
-       [16.0408105 ],
-       [22.46026739],
-       [16.24880776],
-       [20.9618701 ],
-       [17.29790688],
-       [14.13784087],
-       [22.19073221],
-       [22.81654924],
-       [20.88509053],
-       [14.79819402],
-       [27.18833804],
-       [22.34401509],
-       [ 7.70632979],
-       [24.45676699],
-       [15.13494805],
-       [29.55604732],
-       [22.69968942],
-       [23.90015498],
-       [35.59693992],
-       [15.94558135],
-       [19.57954407],
-       [24.86585483],
-       [26.16741821],
-       [18.13469574],
-       [23.97182092],
-       [10.16347934],
-       [25.08952692],
-       [18.81940871],
-       [27.87907928],
-       [21.18963927],
-       [32.41632283],
-       [10.43596897],
-       [51.24516726],
-       [22.4743101 ],
-       [19.30514067],
-       [26.68712303],
-       [26.17608979],
-       [18.35156038],
-       [22.44699314],
-       [42.23726064],
-       [25.57478949],
-       [20.52280188],
-       [22.21251041],
-       [26.97416902],
-       [20.0284332 ],
-       [29.68203604],
-       [16.49839804],
-       [24.18684155],
-       [18.20598617],
-       [13.11447352],
-       [12.76447475],
-       [17.43448228],
-       [29.70566094],
-       [ 9.63301819],
-       [ 9.49427254],
-       [19.49851319],
-       [ 7.51972146],
-       [23.2867901 ],
-       [20.24115786],
-       [26.53845757],
-       [25.65368131],
-       [32.70217389],
-       [27.0427303 ],
-       [34.71999973],
-       [16.94667295],
-       [22.45211884],
-       [18.57538134],
-       [34.64907408],
-       [31.31703019],
-       [22.03288689],
-       [20.87598845],
-       [16.78733096],
-       [36.21755481],
-       [11.42308861],
-       [12.33853593],
-       [28.69823128],
-       [ 8.91345963],
-       [21.1487262 ],
-       [23.25304255],
-       [14.05350283],
-       [45.13375133],
-       [19.51434359],
-       [30.04766941],
-       [17.34898016],
-       [14.58271742],
-       [19.73311663],
-       [17.42569938],
-       [24.34459969],
-       [25.39961442],
-       [22.88509175],
-       [ 2.42827822],
-       [ 8.21206566]])</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
